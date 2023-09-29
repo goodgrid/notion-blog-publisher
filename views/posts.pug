@@ -7,7 +7,7 @@ block content
         .icon 
           img(src=post.icon)
         .feature-content
-          a(href=post.title) 
+          a(href=encodeURIComponent(post.title)) 
             h3= post.title
           i
             #{post.date}

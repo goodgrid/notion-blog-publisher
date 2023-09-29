@@ -22,15 +22,14 @@ app.get("/", async (req, res) => {
 })
 
 app.get("/:title", async (req, res) => {
-
-    const post = await Notion.getPost(req.params.title)
+    const title = decodeURIComponent(req.params.title)
+    const post = await Notion.getPost(title)
     if (post) {
-        console.log(post.paragraphs)
-
         res.render('post', {
             post: post
         });
     
     }    
     res.status(404)
+    res.send("This article was not found")
 })

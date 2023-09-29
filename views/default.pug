@@ -1,29 +1,47 @@
 doctype html
 head
   title Cloudguide Blog
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1')
   meta(name='description' content='CloudGuide ondersteunt organisaties bij de transformatie naar een digital first business. Mensen en hun onderlinge samenwerking staan hierin centraal.')
-  link(rel='canonical' href='https://www.cloudguide.nl/')
-  meta(property='og:locale' content='nl_NL')
-  meta(property='og:type' content='blog')
-  meta(property='og:title' content='Cloudguide - Accelerate Digital Innovation')
-  meta(property='og:description' content='CloudGuide ondersteunt organisaties bij de transformatie naar een digital first business. Mensen en hun onderlinge samenwerking staan hierin centraal.')
-  meta(property='og:url' content='https://www.cloudguide.nl/')
-  meta(property='og:site_name' content='CloudGuide')
-
-
-  //link#cloudguide-style-css(rel='stylesheet' href='https://www.cloudguide.nl/wp-content/themes/cloudguide/style.css?ver=1.0.0' media='all')
   link#bootstrap-css(rel='stylesheet' href='https://www.cloudguide.nl/wp-content/themes/cloudguide/static/plugin/bootstrap/css/bootstrap.min.css?ver=6.3.1' media='all')
-  link#fontawesome-css(rel='stylesheet' href='https://www.cloudguide.nl/wp-content/themes/cloudguide/static/plugin/font-awesome/css/fontawesome-all.min.css?ver=6.3.1' media='all')
-  link#et-line-css(rel='stylesheet' href='https://www.cloudguide.nl/wp-content/themes/cloudguide/static/plugin/et-line/style.css?ver=6.3.1' media='all')
-  link#icons-css(rel='stylesheet' href='https://www.cloudguide.nl/wp-content/themes/cloudguide/static/plugin/themify-icons/themify-icons.css?ver=6.3.1' media='all')
-  link#owl-css(rel='stylesheet' href='https://www.cloudguide.nl/wp-content/themes/cloudguide/static/plugin/owl-carousel/css/owl.carousel.min.css?ver=6.3.1' media='all')
-  link#magnific-css(rel='stylesheet' href='https://www.cloudguide.nl/wp-content/themes/cloudguide/static/plugin/magnific/magnific-popup.css?ver=6.3.1' media='all')
   link#ic-style-css(rel='stylesheet' href='https://www.cloudguide.nl/wp-content/themes/cloudguide/static/css/style.css?ver=6.3.1' media='all')
-  link#ic-color-css(rel='stylesheet' href='https://www.cloudguide.nl/wp-content/themes/cloudguide/static/css/color/default.css?ver=6.3.1' media='all')
-  script#jquery-core-js(src='https://www.cloudguide.nl/wp-includes/js/jquery/jquery.min.js?ver=3.7.0')
-// Header
+  link(href='https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap' rel='stylesheet')
+  style.
+    html {
+    overflow-x: hidden;
+    }
+    body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: green;
+    font-smoothing: antialiased;
+    font-weight: 400;
+    overflow-x: hidden;
+    letter-spacing: 0.5px;
+    background-color: #f8f8f8;
+    }
+    p, h2 {
+    margin-top: 50px;
+    }
+    a {
+    text-decoration: none !important;
+    }
+    img {
+    max-width: 100%;
+    }
+    h3 {
+      color: green;
+    }
+    .feature-box-01 {
+    box-shadow: 0 8px 50px -6px rgba(84,84,120,.26);
+    padding: 25px 20px;
+    position: relative;
+    background: #fff;
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    }
+
 header.fixed-header
   nav.navbar.header-nav.navbar-expand-lg
     .container.container-large
@@ -35,21 +53,10 @@ header.fixed-header
       #navbar.collapse.navbar-collapse.justify-content-end
         ul.navbar-nav.ml-auto.align-items-center
           li
-            a.nav-link(href='https://www.cloudguide.nl/#home') Home
+            a.nav-link.active(href='/') Blog Home
           li
-            a.nav-link(href='https://www.cloudguide.nl/#partners') Partners
-          li
-            a.nav-link(href='https://www.cloudguide.nl/#about') Over
-          li
-            a.nav-link(href='https://www.cloudguide.nl/#diensten') Oplossingen
-          li
-            a.nav-link(href='https://www.cloudguide.nl/#klanten') Klanten
-          li
-            a.nav-link(href='https://www.cloudguide.nl/#nieuws') Nieuws
-          li
-            a.nav-link(href='mailto:info@cloudguide.nl') Contact
-          li
-            a.nav-link.active(href='/') Blog
+            a.nav-link(href='https://www.cloudguide.nl/#home') Corporate site
+
 main
   // Home Banner
   section#home.home-section.theme-main.home-banner
@@ -57,7 +64,7 @@ main
       .row.align-items-center.full-screen.p-100px-tb.sm-p-30px-b.pt-0
         .col-lg-12.sm-p-0px-t.sm-p-30px-b.text-center
           h1 CloudGuide Blog
-  section#partners.section.gray-bg.pt-0
+  section
     .container
       .row.m-45px-b.md-m-25px-b.justify-content-center
         .col-md-10.col-lg-8

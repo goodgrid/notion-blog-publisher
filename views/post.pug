@@ -1,14 +1,25 @@
 extends default
 
 block content
-  .post 
-    h1= post.title
-    each paragraph in post.paragraphs
-      case paragraph.type
-        when "text"
-          p= paragraph.content
-        when "image"
-          p 
-            img(src=paragraph.url)
-        default 
-          p= paragraph.type
+  .feature-box-01
+    .icon 
+      img(src=post.icon)
+    .feature-content
+      a(href=post.title) 
+        h3= post.title
+      i
+        #{post.date}
+        #{post.author}    
+      each paragraph in post.paragraphs
+        case paragraph.type
+          when "text"
+            p= paragraph.content
+          when "bulleted_list_item"
+            li= paragraph.content
+          when "heading_2"
+            b= paragraph.content
+          when "image"
+            p 
+              img(src=paragraph.url)
+          default 
+            p= paragraph.type

@@ -30,7 +30,7 @@ const Notion = {
                 console.log(post)
                 return {
                     title: post.properties[Config.notionSchema.posts.properties.title].title[0].plain_text,
-                    icon: (post.icon.external)?post.icon.external.url:"https://www.notion.so/icons/document_green.svg",
+                    icon: (post.icon && post.icon.external)?post.icon.external.url:"https://www.notion.so/icons/document_green.svg",
                     author: post.properties[Config.notionSchema.posts.properties.creator].created_by.id,
                     date: post.properties[Config.notionSchema.posts.properties.created].created_time,
                     summary: post.properties[Config.notionSchema.posts.properties.summary].rich_text[0].plain_text,
@@ -65,6 +65,7 @@ const Notion = {
                 const post = data.results[0]
                 return {
                     title: post.properties[Config.notionSchema.posts.properties.title].title[0].plain_text,
+                    icon: (post.icon && post.icon.external)?post.icon.external.url:"https://www.notion.so/icons/document_green.svg",
                     author: post.properties[Config.notionSchema.posts.properties.creator].created_by.id,
                     date: post.properties[Config.notionSchema.posts.properties.created].created_time,
                     paragraphs: convertBlocks(await Notion.getBlocks(post.id))
@@ -110,16 +111,22 @@ const convertBlocks = (blocks) => {
                         type: "text",
                         content: (block.paragraph.rich_text[0])?block.paragraph.rich_text[0].plain_text:""
                     }
-                    
-
-
             case "image":
                 return {
                     type: "image",
                     url: block.image.file.url
                 }
-
-            default:
+                case "bulleted_list_item":
+                    return {
+                        type: "bulleted_list_item",
+                        content: block.bulleted_list_item.rich_text[0].plain_text
+                    }
+                case "heading_2":
+                    return {
+                        type: "heading_2",
+                        content: block.heading_2.rich_text[0].plain_text
+                    }
+                    default:
                 console.error(`Oops, we encounted an unimplemented block type: ${block.type}`)
                 console.error(block)
                 return {}

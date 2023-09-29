@@ -8,5 +8,3 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: NOTION_TOKEN
-        value: secret_magyJ8fLT7ByvClJBJYqOzSEj7ZIPG9pnDmvz0arqeS
