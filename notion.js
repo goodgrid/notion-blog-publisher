@@ -33,7 +33,7 @@ const Notion = {
                     icon: (post.icon && post.icon.external)?post.icon.external.url:"https://www.notion.so/icons/document_green.svg",
                     author: post.properties[Config.notionSchema.posts.properties.creator].created_by.id,
                     date: post.properties[Config.notionSchema.posts.properties.created].created_time,
-                    summary: post.properties[Config.notionSchema.posts.properties.summary].rich_text[0].plain_text,
+                    summary: (post.properties[Config.notionSchema.posts.properties.summary].rich_text[0])?post.properties[Config.notionSchema.posts.properties.summary].rich_text[0].plain_text:"Samenvatting is nog niet beschikbar. Klik om het artikel te lezen",
                 }
             })
         } catch(error) {
@@ -100,8 +100,6 @@ export default Notion
 
 const convertBlocks = (blocks) => {
 
-    
-    
     return blocks.map(block => {
 
         switch (block.type) {
