@@ -1,0 +1,16 @@
+extends default
+
+block content
+  .post-list
+    each post in posts 
+      .feature-box-01
+        .icon 
+          img(src=post.icon)
+        .feature-content
+          a(href=post.title) 
+            h3= post.title
+          i
+            #{post.date}
+            #{post.author}
+          p= post.summary
+               

@@ -1,0 +1,14 @@
+extends default
+
+block content
+  .post 
+    h1= post.title
+    each paragraph in post.paragraphs
+      case paragraph.type
+        when "text"
+          p= paragraph.content
+        when "image"
+          p 
+            img(src=paragraph.url)
+        default 
+          p= paragraph.type
