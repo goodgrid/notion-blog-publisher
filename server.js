@@ -11,7 +11,7 @@ app.set('view engine', 'pug');
 
 app.listen(Config.serverPort, () => console.log(`Service started and listening on port ${Config.serverPort}`));
 
-app.get("/", async (req, res) => {
+app.get("api/", async (req, res) => {
 
     const posts = await Notion.getPosts()
     console.log(`Passing ${posts.length} items to view`)
@@ -21,7 +21,7 @@ app.get("/", async (req, res) => {
     });
 })
 
-app.get("/:title", async (req, res) => {
+app.get("api/:title", async (req, res) => {
     const title = decodeURIComponent(req.params.title)
     const post = await Notion.getPost(title)
     if (post) {
