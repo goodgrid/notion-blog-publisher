@@ -1,16 +1,106 @@
-extends default
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  link(rel='icon' href='/assets/images/logo.png')
+  title CloudGuide BizTech Foundation blog
+  meta(property='og:title' content='CloudGuide BizTech Foundation blog')
+  meta(property='og:locale' content='nl_NL')
+  meta(name='description' content='CloudGuide blog op het raakvlak tussen organisatie-ontwerp en technologie')
+  meta(property='og:description' content='CloudGuide blog op het raakvlak tussen organisatie-ontwerp en technologie')
+  meta(property='og:site_name' content='CloudGuide BizTech Foundation blog')
+  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous')
+  link(href='/assets/css/screen.css' rel='stylesheet')
+  link(href='/assets/css/main.css' rel='stylesheet')
+  script(src='/assets/js/jquery.min.js')
+// defer loading of font and font awesome
+noscript#deferred-styles
+  link(href='https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i' rel='stylesheet')
+  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.13/css/all.css' integrity='sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp' crossorigin='anonymous')
 
-block content
-  .post-list
-    each post in posts 
-      .feature-box-01
-        .icon 
-          img(src=post.icon)
-        .feature-content
-          a(href=encodeURIComponent(post.title)) 
-            h3= post.title
-          i
-            #{post.date}
-            #{post.author}
-          p= post.summary
-               
+include menu.pug
+
+.site-content
+  .container
+    //
+      Site Title
+      ==================================================
+    .mainheading
+      h1.sitetitle Biztech Foundation Blog
+      p.lead
+        | Artikelen op het raakvlak tussen organisatie-ontwerp en technologie
+    //
+      Content
+      ==================================================
+    
+    .section-title
+      h2
+        span Recente artikelen
+    .row.listrecent
+
+      each post in posts
+        .col-md-6.mb-30px
+          .listfeaturedtag.h-100
+            .row.h-100
+              .col-12.col-md-12.col-lg-5.pr-lg-0
+                .h-100
+                  .wrapthumbnail
+                    a(href= encodeURIComponent(post.title))
+                      img.featured-box-img-cover(src= post.cover)
+              .col-12.col-md-12.col-lg-7
+                .h-100.card-group
+                  .card
+                    .card-body
+                      h2.card-title
+                        a.text-dark(href= encodeURIComponent(post.title))= post.title
+                      h4.card-text= post.summary
+                    .card-footer.b-0.bg-white.mt-auto
+                      .wrapfooter
+                        span.meta-footer-thumb
+                          img.author-thumb(src='https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&d=mm&r=x' alt='Sal')
+                        span.author-meta
+                          span.post-name
+                            a(target='_blank' href='https://www.wowthemes.net')= post.author
+                          br
+                          span.post-date= post.date
+                        span.post-read-more
+                          a(href='/mediumish-theme-jekyll//quick-start-guide/' title='Read Story')
+                            svg.svgIcon-use(width='25' height='25' viewbox='0 0 25 25')
+                              path(d='M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z' fill-rule='evenodd')
+                        .clearfix
+
+
+    //
+      Bottom Alert Bar
+      ==================================================
+    .alertbar
+      .container.text-center
+        span
+          img(src='/assets/images/logo.png' alt='Mediumish')
+          |  &nbsp; Mis geen enkel 
+          b verhaal
+          | ; abonneer je op de nieuwsbrief
+        form.wj-contact-form.validate(action='https://wowthemes.us11.list-manage.com/subscribe/post?u=8aeb20a530e124561927d3bd8&id=8c3d2d214b' method='post' name='mc-embedded-subscribe-form' target='_blank' novalidate='')
+          .mc-field-group
+            input#mce-EMAIL.required.email(type='email' placeholder='Email' name='EMAIL' autocomplete='on' required='')
+            input.heart(type='submit' value='Abonneer' name='subscribe')
+  //
+    Categories Jumbotron
+    ==================================================
+  .jumbotron.fortags
+    .d-md-flex.h-100
+      .col-md-4.transpdark.align-self-center.text-center.h-100
+        .d-md-flex.align-items-center.justify-content-center.h-100
+          h2.d-md-block.align-self-center.py-1.font-weight-light
+            | Explore 
+            span.d-none.d-md-inline &rarr;
+      .col-md-8.p-5.align-self-center.text-center
+        a.mt-1.mb-1(href='/mediumish-theme-jekyll/categories#Jekyll') Jekyll (14)
+        a.mt-1.mb-1(href='/mediumish-theme-jekyll/categories#tutorial') tutorial (12)
+        a.mt-1.mb-1(href='/mediumish-theme-jekyll/categories#web-development') web development (1)
+
+  include footer.pug
+
+script(src='/assets/bootstrap-3.4.1-dist/js/bootstrap.min.js')
+script(src='/assets/js/mediumish.js')
+script(src='/assets/js/ie10-viewport-bug-workaround.js')

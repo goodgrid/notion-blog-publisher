@@ -1,25 +1,174 @@
-extends default
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  title= post.title
+  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous')
+  link(href='/assets/css/screen.css' rel='stylesheet')
+  link(href='/assets/css/main.css' rel='stylesheet')
+  script(src='/assets/js/jquery.min.js')
+noscript#deferred-styles
+  link(href='https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i' rel='stylesheet')
+  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.13/css/all.css' integrity='sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp' crossorigin='anonymous')
 
-block content
-  .feature-box-01
-    .icon 
-      img(src=post.icon)
-    .feature-content
-      a(href=post.title) 
-        h3= post.title
-      i
-        #{post.date}
-        #{post.author}    
-      each paragraph in post.paragraphs
-        case paragraph.type
-          when "text"
-            p= paragraph.content
-          when "bulleted_list_item"
-            li= paragraph.content
-          when "heading_2"
-            b= paragraph.content
-          when "image"
-            p 
-              img(src=paragraph.url)
-          default 
-            p= paragraph.type
+
+  meta(name='generator' content='Jekyll v3.9.0')
+  meta(property='og:title' content= post.title)
+  meta(name='author' content= post.author)
+  meta(property='og:locale' content='nl_NL')
+  meta(name='description' content= post.summary)
+  meta(property='og:description' content= post.summary)
+  link(rel='canonical' href= "")
+  meta(property='og:url' content= "")
+  meta(property='og:site_name' content='CloudGuide Blog')
+  meta(property='og:image' content='https://wowthemesnet.github.io/assets/images/12.jpg')
+  meta(property='og:type' content='article')
+  meta(property='article:published_time' content= post.date)
+  meta(name='twitter:card' content='summary_large_image')
+  meta(property='twitter:image' content='https://wowthemesnet.github.io/assets/images/12.jpg')
+  meta(property='twitter:title' content= post.title)
+
+
+include menu.pug
+
+.site-content
+  .container
+    //
+      Site Title
+      ==================================================
+    .mainheading
+      h1.sitetitle Biztech Foundation Blog
+      p.lead
+        | Artikelen op het raakvlak tussen organisatie-ontwerp en technologie
+    //
+
+      Content
+      ==================================================
+    .main-content
+      //
+        Begin Article
+        ==================================================
+      .container
+        .row
+          // Post Share
+          .col-md-2.pl-0
+            .share.sticky-top.sticky-top-offset
+              p
+                | Share
+              ul
+                li.ml-1.mr-1
+                  a(target='_blank' href="https://twitter.com/intent/tweet?text=Let's test spoilers&url=https://wowthemesnet.github.io/mediumish-theme-jekyll/quick-start-guide/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;")
+                    i.fab.fa-twitter
+                li.ml-1.mr-1
+                  a(target='_blank' href='https://facebook.com/sharer.php?u=https://wowthemesnet.github.io/mediumish-theme-jekyll/quick-start-guide/' onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;")
+                    i.fab.fa-facebook-f
+                li.ml-1.mr-1
+                  a(target='_blank' href='https://www.linkedin.com/shareArticle?mini=true&url=https://wowthemesnet.github.io/mediumish-theme-jekyll/quick-start-guide/' onclick="window.open(this.href, 'width=550,height=435');return false;")
+                    i.fab.fa-linkedin-in
+              .sep
+              ul
+                li
+                  a.small.smoothscroll(href='#disqus_thread')
+          // Post
+          .col-md-9.flex-first.flex-md-unordered
+            .mainheading
+              // Author Box
+              .row.post-top-meta
+                .col-xs-12.col-md-3.col-lg-2.text-center.text-md-left.mb-4.mb-md-0
+                  img.author-thumb(src='https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&d=mm&r=x' alt='Sal')
+                .col-xs-12.col-md-9.col-lg-10.text-center.text-md-left
+                  a.link-dark(target='_blank' href='https://www.wowthemes.net')= post.author
+                  
+                  span.author-description
+                    | Author of Mediumish, a Bootstrap Medium styled template available for WordPress, HTML, Ghost and Jekyll. You are currently previewing Jekyll template demo.
+              // Post Title
+              h1.posttitle= post.title
+            // Post Featured Image
+            img.featured-image.img-fluid(src= post.cover)
+            // End Featured Image
+            // Post Content
+            .article-post
+              // Toc if any
+              // End Toc
+
+              each paragraph in post.paragraphs
+                case paragraph.type
+                  when "text"
+                    p= paragraph.content
+                  when "bulleted_list_item"
+                    li= paragraph.content
+                  when "heading_2"
+                    b= paragraph.content
+                  when "image"
+                    p 
+                      img(src=paragraph.url)
+                  default 
+                    p= paragraph.type
+
+            // Post Date
+            p
+              small
+                span.post-date
+                  time.post-date(datetime='2018-01-11') 11 Jan 2018
+            // Post Categories
+            .after-post-cats
+              ul.tags.mb-4
+                li
+                  a.smoothscroll(href='/mediumish-theme-jekyll/categories#Jekyll') Jekyll
+                li
+                  a.smoothscroll(href='/mediumish-theme-jekyll/categories#tutorial') tutorial
+            // End Categories
+            // Post Tags
+            .after-post-tags
+              ul.tags
+            // End Tags
+            // Prev/Next
+            .row.PageNavigation.d-flex.justify-content-between.font-weight-bold
+              a.prev.d-block.col-md-6(href='/mediumish-theme-jekyll//customer-service/')  &laquo; Inception Movie
+              a.next.d-block.col-md-6.text-lg-right(href='/mediumish-theme-jekyll//is-intelligence-enough/') External Featured Image &raquo; 
+              .clearfix
+            // End Categories
+          // End Post
+      //
+        End Article
+        ==================================================
+      //
+        Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first:
+        https://search.google.com/structured-data/testing-tool/u/0/
+        ==================================================
+    //
+      Bottom Alert Bar
+      ==================================================
+    .alertbar
+      .container.text-center
+        span
+          img(src='/assets/images/logo.png' alt='Mediumish')
+          |                          &nbsp; Never miss a 
+          b story
+          |                          from us, subscribe to our newsletter
+        form.wj-contact-form.validate(action='https://wowthemes.us11.list-manage.com/subscribe/post?u=8aeb20a530e124561927d3bd8&id=8c3d2d214b' method='post' name='mc-embedded-subscribe-form' target='_blank' novalidate='')
+          .mc-field-group
+            input#mce-EMAIL.required.email(type='email' placeholder='Email' name='EMAIL' autocomplete='on' required='')
+            input.heart(type='submit' value='Subscribe' name='subscribe')
+  //
+    Categories Jumbotron
+    ==================================================
+  .jumbotron.fortags
+    .d-md-flex.h-100
+      .col-md-4.transpdark.align-self-center.text-center.h-100
+        .d-md-flex.align-items-center.justify-content-center.h-100
+          h2.d-md-block.align-self-center.py-1.font-weight-light
+            | Explore 
+            span.d-none.d-md-inline &rarr;
+      .col-md-8.p-5.align-self-center.text-center
+        a.mt-1.mb-1(href='/mediumish-theme-jekyll/categories#Jekyll') Jekyll (14)
+        a.mt-1.mb-1(href='/mediumish-theme-jekyll/categories#tutorial') tutorial (12)
+        a.mt-1.mb-1(href='/mediumish-theme-jekyll/categories#web-development') web development (1)
+
+  include footer.pug
+
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js' integrity='sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut' crossorigin='anonymous')
+script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js' integrity='sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k' crossorigin='anonymous')
+script(src='/assets/js/mediumish.js')
+script(src='/assets/js/ie10-viewport-bug-workaround.js')
+

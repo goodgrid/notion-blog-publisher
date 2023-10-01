@@ -30,10 +30,10 @@ const Notion = {
                 console.log(post)
                 return {
                     title: post.properties[Config.notionSchema.posts.properties.title].title[0].plain_text,
-                    icon: (post.icon && post.icon.external)?post.icon.external.url:"https://www.notion.so/icons/document_green.svg",
+                    cover: (post.cover && post.cover.external)?post.cover.external.url:"https://www.notion.so/icons/document_green.svg",
                     author: post.properties[Config.notionSchema.posts.properties.creator].created_by.id,
                     date: post.properties[Config.notionSchema.posts.properties.created].created_time,
-                    summary: (post.properties[Config.notionSchema.posts.properties.summary].rich_text[0])?post.properties[Config.notionSchema.posts.properties.summary].rich_text[0].plain_text:"Samenvatting is nog niet beschikbar. Klik om het artikel te lezen",
+                    summary: truncateText((post.properties[Config.notionSchema.posts.properties.summary].rich_text[0])?post.properties[Config.notionSchema.posts.properties.summary].rich_text[0].plain_text:"Samenvatting is nog niet beschikbar. Klik om het artikel te lezen"),
                 }
             })
         } catch(error) {
@@ -63,9 +63,12 @@ const Notion = {
                     console.error(`Oops, we found more than 1 article with that title. Returning the first only`)
                 }
                 const post = data.results[0]
+
+                console.log(post)
+
                 return {
                     title: post.properties[Config.notionSchema.posts.properties.title].title[0].plain_text,
-                    icon: (post.icon && post.icon.external)?post.icon.external.url:"https://www.notion.so/icons/document_green.svg",
+                    cover: (post.cover && post.cover.external)?post.cover.external.url:"https://www.notion.so/icons/document_green.svg",
                     author: post.properties[Config.notionSchema.posts.properties.creator].created_by.id,
                     date: post.properties[Config.notionSchema.posts.properties.created].created_time,
                     paragraphs: convertBlocks(await Notion.getBlocks(post.id))
@@ -97,6 +100,13 @@ const Notion = {
 
 export default Notion
 
+
+const truncateText = (string, length) => {
+    if (string.length > 500) {
+        string = string.substring(0,500) + "..."
+    }
+    return string
+}
 
 const convertBlocks = (blocks) => {
 
