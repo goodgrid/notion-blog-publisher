@@ -1,7 +1,6 @@
 import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url';
-import sassMiddleware from 'node-sass-middleware'
 import pkg from 'pug';
 import Config from './config.js';
 import Notion from "./notion.js";
@@ -10,15 +9,6 @@ const {pug} = pkg;
 
 const app = express();
 app.set('view engine', 'pug');
-
-app.use(sassMiddleware({
-    src: path.join("./sass/", path.dirname(fileURLToPath(import.meta.url))),
-    dest: path.join(path.dirname(fileURLToPath(import.meta.url)), 'assets/css'),
-    debug: true,
-    outputStyle: 'compressed',
-    prefix:  '/assets/css/'  // Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
-}));
-//app.use('/public', express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), 'public')));
 
 app.use(express.static('static'))
 

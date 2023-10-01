@@ -27,7 +27,7 @@ const Notion = {
                 
             })
             return data.results.map(post => {
-                console.log(post)
+
                 return {
                     title: post.properties[Config.notionSchema.posts.properties.title].title[0].plain_text,
                     cover: (post.cover && post.cover.external)?post.cover.external.url:"https://www.notion.so/icons/document_green.svg",
@@ -63,8 +63,6 @@ const Notion = {
                     console.error(`Oops, we found more than 1 article with that title. Returning the first only`)
                 }
                 const post = data.results[0]
-
-                console.log(post)
 
                 return {
                     title: post.properties[Config.notionSchema.posts.properties.title].title[0].plain_text,
@@ -114,7 +112,6 @@ const convertBlocks = (blocks) => {
 
         switch (block.type) {
             case "paragraph":
-                //console.log(block)
                 return {
                         type: "text",
                         content: (block.paragraph.rich_text[0])?block.paragraph.rich_text[0].plain_text:""
