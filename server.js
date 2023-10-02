@@ -15,9 +15,10 @@ app.use(express.static('static'))
 app.listen(Config.serverPort, () => console.log(`Service started and listening on port ${Config.serverPort}`));
 
 app.get("/", async (req, res) => {
-
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress 
+    
     const posts = await Notion.getPosts()
-    console.log(`Passing ${posts.length} items to view`)
+    console.log(`${ip} - Passing ${posts.length} items to view`)
 
     res.render('posts', {
         posts: posts
@@ -25,9 +26,11 @@ app.get("/", async (req, res) => {
 })
 
 app.get("/:title", async (req, res) => {
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress 
+
     const title = decodeURIComponent(req.params.title)
     const post = await Notion.getPost(title)
-    console.log(`Fetched post '${title}'`)
+    console.log(`${ip} - Fetched post '${title}'`)
     
     if (post) {
         post.link = getPostLink(req)
