@@ -26,16 +26,17 @@ const Notion = {
                 }
                 
             })
-            return data.results.map(post => {
+            return Promise.all(data.results.map(async post => {
 
                 return {
                     title: post.properties[Config.notionSchema.posts.properties.title].title[0].plain_text,
                     cover: (post.cover && post.cover.external)?post.cover.external.url:"https://www.notion.so/icons/document_green.svg",
-                    author: post.properties[Config.notionSchema.posts.properties.creator].created_by.id,
-                    date: post.properties[Config.notionSchema.posts.properties.created].created_time,
+                    author: await Notion.getUser(post.properties[Config.notionSchema.posts.properties.creator].created_by.id),
+                    authorIntro: (post.properties[Config.notionSchema.posts.properties.authorIntro].rich_text[0])?post.properties[Config.notionSchema.posts.properties.authorIntro].rich_text[0].plain_text:"Intro wordt nog gegenereerd door Notion IA",
+                    date: localizeDate(post.properties[Config.notionSchema.posts.properties.created].created_time),
                     summary: truncateText((post.properties[Config.notionSchema.posts.properties.summary].rich_text[0])?post.properties[Config.notionSchema.posts.properties.summary].rich_text[0].plain_text:"Samenvatting is nog niet beschikbar. Klik om het artikel te lezen"),
                 }
-            })
+            }))
         } catch(error) {
             console.error("Error getting posts")
             console.error(error.response ? error.response.data : error.message)
@@ -64,11 +65,14 @@ const Notion = {
                 }
                 const post = data.results[0]
 
+
+
                 return {
                     title: post.properties[Config.notionSchema.posts.properties.title].title[0].plain_text,
                     cover: (post.cover && post.cover.external)?post.cover.external.url:"https://www.notion.so/icons/document_green.svg",
-                    author: post.properties[Config.notionSchema.posts.properties.creator].created_by.id,
-                    date: post.properties[Config.notionSchema.posts.properties.created].created_time,
+                    author: await Notion.getUser(post.properties[Config.notionSchema.posts.properties.creator].created_by.id),
+                    authorIntro: (post.properties[Config.notionSchema.posts.properties.authorIntro].rich_text[0])?post.properties[Config.notionSchema.posts.properties.authorIntro].rich_text[0].plain_text:"Intro wordt nog gegenereerd door Notion IA",
+                    date: localizeDate(post.properties[Config.notionSchema.posts.properties.created].created_time),
                     paragraphs: convertBlocks(await Notion.getBlocks(post.id))
                 }
 
@@ -91,6 +95,21 @@ const Notion = {
         }
     
 
+    },
+
+    getUser: async (userId) => {
+        try {
+            const { data } = await notionApi.get(`users/${userId}`)
+            
+            return {
+                name: data.name,
+                avatar: data.avatar_url,
+            }
+        } catch(error) {
+            console.error(`Error gettinguser  ${userId}`)
+            console.error(error.response ? error.response.data : error.message)
+        }
+
     }
 
 }
@@ -98,6 +117,11 @@ const Notion = {
 
 export default Notion
 
+
+const localizeDate = (dt) => {
+    const dateObject = new Date(dt)
+    return dateObject.toLocaleDateString('nl-NL', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+}
 
 const truncateText = (string, length) => {
     if (string.length > 500) {

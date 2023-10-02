@@ -25,10 +25,9 @@ include menu.pug
     //
       Site Title
       ==================================================
-    .mainheading
-      h1.sitetitle Biztech Foundation Blog
-      p.lead
-        | Artikelen op het raakvlak tussen organisatie-ontwerp en technologie
+
+    include site-title.pug
+
     //
       Content
       ==================================================
@@ -57,10 +56,10 @@ include menu.pug
                     .card-footer.b-0.bg-white.mt-auto
                       .wrapfooter
                         span.meta-footer-thumb
-                          img.author-thumb(src='https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&d=mm&r=x' alt='Sal')
+                          img.author-thumb(src=post.author.avatar)
                         span.author-meta
                           span.post-name
-                            a(target='_blank' href='https://www.wowthemes.net')= post.author
+                            a(target='_blank' href='https://www.wowthemes.net')= post.author.name
                           br
                           span.post-date= post.date
                         span.post-read-more

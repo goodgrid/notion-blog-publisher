@@ -27,12 +27,22 @@ app.get("/", async (req, res) => {
 app.get("/:title", async (req, res) => {
     const title = decodeURIComponent(req.params.title)
     const post = await Notion.getPost(title)
+    console.log(`Fetched post '${title}'`)
+    
     if (post) {
-        res.render('post', {
+        post.link = getPostLink(req)
+
+        res.status(200.).render('post', {
             post: post
         });
     
+    } else {
+        res.status(404).send("This article was not found")
     }    
-    res.status(404)
-    res.send("This article was not found")
+    
 })
+
+
+const getPostLink = (req) => {
+    return `${req.protocol}://${req.hostname}${req.url}`
+}

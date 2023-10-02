@@ -11,6 +11,7 @@ const Config = {
                 title: "Name",
                 created: "Created time",
                 creator: "Created by",
+                authorIntro: "Author intro",
                 published: "Gepubliceerd",
                 summary: "AI summary",
 
