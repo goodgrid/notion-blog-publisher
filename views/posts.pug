@@ -2,17 +2,19 @@ doctype html
 head
   meta(charset='utf-8')
   meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
-  link(rel='icon' href='/assets/images/logo.png')
-  title CloudGuide BizTech Foundation blog
-  meta(property='og:title' content='CloudGuide BizTech Foundation blog')
-  meta(property='og:locale' content='nl_NL')
-  meta(name='description' content='CloudGuide blog op het raakvlak tussen organisatie-ontwerp en technologie')
-  meta(property='og:description' content='CloudGuide blog op het raakvlak tussen organisatie-ontwerp en technologie')
-  meta(property='og:site_name' content='CloudGuide BizTech Foundation blog')
+  link(rel='icon' href= config.content.logo)
+  title= config.content.title
+  meta(property='og:title' content= config.content.title)
+  meta(property='og:locale' content= config.content.language)
+  meta(name='description' content= config.content.subject)
+  meta(property='og:description' content= config.content.subject)
+  meta(property='og:site_name' content= config.content.title)
+
   link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous')
   link(href='/assets/css/screen.css' rel='stylesheet')
   link(href='/assets/css/main.css' rel='stylesheet')
   script(src='/assets/js/jquery.min.js')
+
 // defer loading of font and font awesome
 noscript#deferred-styles
   link(href='https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i' rel='stylesheet')
@@ -34,7 +36,7 @@ include menu.pug
     
     .section-title
       h2
-        span Recente artikelen
+        span= config.content.headerRecent
     .row.listrecent
 
       each post in posts
@@ -73,6 +75,7 @@ include menu.pug
 
   include footer.pug
 
-script(src='/assets/bootstrap-3.4.1-dist/js/bootstrap.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js' integrity='sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut' crossorigin='anonymous')
+script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js' integrity='sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k' crossorigin='anonymous')
 script(src='/assets/js/mediumish.js')
 script(src='/assets/js/ie10-viewport-bug-workaround.js')

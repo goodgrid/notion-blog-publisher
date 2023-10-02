@@ -16,11 +16,12 @@ app.listen(Config.serverPort, () => console.log(`Service started and listening o
 
 app.get("/", async (req, res) => {
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress 
-    
+
     const posts = await Notion.getPosts()
     console.log(`${ip} - Passing ${posts.length} items to view`)
 
     res.render('posts', {
+        config: Config,
         posts: posts
     });
 })
@@ -36,6 +37,7 @@ app.get("/:title", async (req, res) => {
         post.link = getPostLink(req)
 
         res.status(200.).render('post', {
+            config: Config,
             post: post
         });
     

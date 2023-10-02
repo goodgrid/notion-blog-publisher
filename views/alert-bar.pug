@@ -4,11 +4,11 @@
 .alertbar
     .container.text-center
         span
-            img(src='https://www.cloudguide.nl/static/img/logo.svg' height='15px' alt='CloudGuide')
+            img(src= config.content.logo height='15px' alt='CloudGuide')
             |  &nbsp; Mis geen enkel 
             b verhaal 
             | en abonneer je op de nieuwsbrief
-        form.wj-contact-form.validate(action='https://cloudguide.us8.list-manage.com/subscribe/post?u=719a440ea3eab186ad5a63e8f&id=57cdbb3c99' method='post' name='mc-embedded-subscribe-form' target='_blank' novalidate='')
+        form.wj-contact-form.validate(action= config.content.subscriptionUrl method='post' name='mc-embedded-subscribe-form' target='_blank' novalidate='')
             .mc-field-group
             input#mce-EMAIL.required.email(type='email' placeholder='Email' name='EMAIL' autocomplete='on' required='')
             input.heart(type='submit' value='Abonneer' name='subscribe')
