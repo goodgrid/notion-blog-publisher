@@ -157,7 +157,6 @@ const convertBlocks = (blocks) => {
                     }
                     default:
                 console.error(`Oops, we encounted an unimplemented block type: ${block.type}`)
-                console.error(block)
                 return {}
         }
 
