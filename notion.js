@@ -31,7 +31,6 @@ const Notion = {
             })
             return Promise.all(data.results.map(async post => {
 
-                console.log(post.properties.path.rich_text[0].plain_text)
                 return {
                     path: (post.properties["path"].rich_text.length>0)?post.properties["path"].rich_text[0].plain_text:"/", 
                     title: post.properties[Config.notionSchema.posts.properties.title].title[0].plain_text,
