@@ -26,12 +26,12 @@ app.get("/", async (req, res) => {
     });
 })
 
-app.get("/:title", async (req, res) => {
+app.get("/:path", async (req, res) => {
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress 
 
-    const title = decodeURIComponent(req.params.title)
-    const post = await Notion.getPost(title)
-    console.log(`${ip} - Fetched post '${title}'`)
+    const path = req.params.path
+    const post = await Notion.getPost(path)
+    console.log(`${ip} - Fetched post '${path}'`)
     
     if (post) {
         post.link = getPostLink(req)

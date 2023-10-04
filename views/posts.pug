@@ -46,14 +46,14 @@ include menu.pug
               .col-12.col-md-12.col-lg-5.pr-lg-0
                 .h-100
                   .wrapthumbnail
-                    a(href= encodeURIComponent(post.title))
+                    a(href= post.path)
                       img.featured-box-img-cover(src= post.cover)
               .col-12.col-md-12.col-lg-7
                 .h-100.card-group
                   .card
                     .card-body
                       h2.card-title
-                        a.text-dark(href= encodeURIComponent(post.title))= post.title
+                        a.text-dark(href= post.path)= post.title
                       h4.card-text= post.summary
                     .card-footer.b-0.bg-white.mt-auto
                       .wrapfooter
@@ -64,7 +64,7 @@ include menu.pug
                           br
                           span.post-date= post.date
                         span.post-read-more
-                          a(href=encodeURIComponent(post.title) title='Lees verder')
+                          a(href=post.path) title='Lees verder')
                             svg.svgIcon-use(width='25' height='25' viewbox='0 0 25 25')
                               path(d='M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z' fill-rule='evenodd')
                         .clearfix

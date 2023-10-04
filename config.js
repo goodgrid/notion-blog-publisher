@@ -18,6 +18,7 @@ const Config = {
         posts: {
             database: "ba08672c533f4bef9052bf4e8abeaff5", 
             properties: {
+                path: "path",
                 title: "Name",
                 created: "Created time",
                 creator: "Created by",

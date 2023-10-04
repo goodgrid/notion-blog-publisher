@@ -22,13 +22,18 @@ const Notion = {
                     "and": [{
                         "property": Config.notionSchema.posts.properties.published,
                         "checkbox": {"equals": true }
+                    },{
+                        "property": Config.notionSchema.posts.properties.path,
+                        "rich_text": {"is_not_empty": true}
                     }]
                 }
                 
             })
             return Promise.all(data.results.map(async post => {
 
+                console.log(post.properties.path.rich_text[0].plain_text)
                 return {
+                    path: (post.properties["path"].rich_text.length>0)?post.properties["path"].rich_text[0].plain_text:"/", 
                     title: post.properties[Config.notionSchema.posts.properties.title].title[0].plain_text,
                     cover: (post.cover && post.cover.external)?post.cover.external.url:"https://www.notion.so/icons/document_green.svg",
                     author: await Notion.getUser(post.properties[Config.notionSchema.posts.properties.creator].created_by.id),
@@ -40,18 +45,19 @@ const Notion = {
         } catch(error) {
             console.error("Error getting posts")
             console.error(error.response ? error.response.data : error.message)
+            
         }
     
     },
 
-    getPost: async (title) => {
+    getPost: async (path) => {
         try {
             const { data } = await notionApi.post(`databases/${Config.notionSchema.posts.database}/query`, {
                 
                 "filter": {
                     "and": [{
-                        "property": Config.notionSchema.posts.properties.title,
-                        "title": {"equals": title }
+                        "property": Config.notionSchema.posts.properties.path,
+                        "rich_text": {"equals": path }
                     }]
                 }
                 
@@ -61,12 +67,9 @@ const Notion = {
                 return undefined
             } else {
                 if (data.results.length > 1) {
-                    console.error(`Oops, we found more than 1 article with that title. Returning the first only`)
+                    console.error(`Oops, we found more than one article with that path. Returning the first only`)
                 }
                 const post = data.results[0]
-
-
-
                 return {
                     title: post.properties[Config.notionSchema.posts.properties.title].title[0].plain_text,
                     cover: (post.cover && post.cover.external)?post.cover.external.url:"https://www.notion.so/icons/document_green.svg",
@@ -79,7 +82,7 @@ const Notion = {
             }
 
         } catch(error) {
-            console.error(`Error getting post ${title}`)
+            console.error(`Error getting post ${path}`)
             console.error(error.response ? error.response.data : error.message)
         }
     
