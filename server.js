@@ -35,6 +35,7 @@ app.get("/:path", async (req, res) => {
     
     if (post) {
         post.link = getPostLink(req)
+        post.cover = `${post.cover}&w=1200`
 
         res.status(200.).render('post', {
             config: Config,
