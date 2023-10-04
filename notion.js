@@ -76,6 +76,7 @@ const Notion = {
                     author: await Notion.getUser(post.properties[Config.notionSchema.posts.properties.creator].created_by.id),
                     authorIntro: (post.properties[Config.notionSchema.posts.properties.authorIntro].rich_text[0])?post.properties[Config.notionSchema.posts.properties.authorIntro].rich_text[0].plain_text:"Intro wordt nog gegenereerd door Notion IA",
                     date: localizeDate(post.properties[Config.notionSchema.posts.properties.created].created_time),
+                    summary: truncateText((post.properties[Config.notionSchema.posts.properties.summary].rich_text[0])?post.properties[Config.notionSchema.posts.properties.summary].rich_text[0].plain_text:"Samenvatting is nog niet beschikbar. Klik om het artikel te lezen"),
                     paragraphs: convertBlocks(await Notion.getBlocks(post.id))
                 }
 
