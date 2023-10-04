@@ -158,9 +158,15 @@ const convertBlocks = (blocks) => {
                         type: "heading_2",
                         content: block.heading_2.rich_text[0].plain_text
                     }
-                    default:
-                console.error(`Oops, we encounted an unimplemented block type: ${block.type}`)
-                return {}
+                case "video":
+                    console.log(block)
+                    return {
+                        type: "video",
+                        content: block.video.file.url
+                    }
+                default:
+                    console.error(`Oops, we encounted an unimplemented block type: ${block.type}`)
+                    return {}
         }
 
     })
