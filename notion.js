@@ -159,7 +159,6 @@ const convertBlocks = (blocks) => {
                         content: block.heading_2.rich_text[0].plain_text
                     }
                 case "video":
-                    console.log(block)
                     return {
                         type: "video",
                         content: block.video.file.url
