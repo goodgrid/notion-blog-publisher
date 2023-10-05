@@ -1,9 +1,7 @@
 import express from 'express'
-import path from 'path'
-import { fileURLToPath } from 'url';
 import pkg from 'pug';
-import Config from './config.js';
 import Notion from "./notion.js";
+import Config from './config.js';
 
 const {pug} = pkg;
 
@@ -18,12 +16,16 @@ app.get("/", async (req, res) => {
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress 
 
     const posts = await Notion.getPosts()
-    console.log(`${ip} - Passing ${posts.length} items to view`)
+    if (posts) {
+        console.log(`${ip} - Passing ${posts.length} items to view`)
 
-    res.render('posts', {
-        config: Config,
-        posts: posts
-    });
+        res.render('posts', {
+            config: Config,
+            posts: posts
+        });
+    } else {
+        res.status(500).send("Unexpected result while fetching posts")
+    }
 })
 
 app.get("/:path", async (req, res) => {

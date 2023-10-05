@@ -11,6 +11,12 @@ const notionApi = axios.create({
     } 
 })
 
+notionApi.interceptors.response.use(null, (error) => {
+    
+    const status = error.response ? error.response.status : null
+    console.error(`Notion API returned response status ${status}`)
+    return Promise.reject(error);
+});
 
 
 const Notion = {
