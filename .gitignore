@@ -6,3 +6,4 @@ _site
 
 node_modules
 secret.js
+package-lock.json

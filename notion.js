@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosRetry from 'axios-retry';
 import Config from "./config.js";
 
 const notionApi = axios.create({
@@ -11,13 +12,16 @@ const notionApi = axios.create({
     } 
 })
 
-notionApi.interceptors.response.use(null, (error) => {
-    
-    const status = error.response ? error.response.status : null
-    console.error(`Notion API returned response status ${status}`)
-    return Promise.reject(error);
+axiosRetry(notionApi, { 
+    retries: 3,
+    retryDelay: (retryCount) => {
+        return retryCount * 1000;
+    },
+    onRetry: (retryCount, error, requestConfig) => {
+        console.warn(`Attempt ${retryCount} for endpoint ${requestConfig.url}`)
+        return
+    }
 });
-
 
 const Notion = {
     getPosts: async () => {
