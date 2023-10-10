@@ -4,7 +4,7 @@ const Config = {
     serverPort: 8080,
     notionToken: (process.env.NOTION_TOKEN)?process.env.NOTION_TOKEN:Secrets.notionToken,
     notionApiVersion: '2022-06-28',
-    plausibleDomain: (process.env.PLAUSIBLE_DOMAIN)?process.env.PLAUSIBLE_DOMAIN:"blog.notarisid.nl",
+    cfStatsToken: (process.env.CF_STATS_TOKEN)?process.env.CF_STATS_TOKEN:"blog.notarisid.nl",
     content: {
         /*
         title: "Biztech Foundation Blog",
