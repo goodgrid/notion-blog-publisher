@@ -163,10 +163,20 @@ const convertBlocks = (blocks) => {
                         type: "bulleted_list_item",
                         content: block.bulleted_list_item.rich_text[0].plain_text
                     }
+                case "heading_1":
+                    return {
+                        type: "heading_1",
+                        content: block.heading_1.rich_text[0].plain_text
+                    }
                 case "heading_2":
                     return {
                         type: "heading_2",
                         content: block.heading_2.rich_text[0].plain_text
+                    }
+                case "heading_3":
+                    return {
+                        type: "heading_3",
+                        content: block.heading_3.rich_text[0].plain_text
                     }
                 case "video":
                     return {

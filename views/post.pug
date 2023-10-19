@@ -96,8 +96,12 @@ include menu.pug
                     p= paragraph.content
                   when "bulleted_list_item"
                     li= paragraph.content
+                  when "heading_1"
+                    h1= paragraph.content
                   when "heading_2"
-                    b= paragraph.content
+                    h2= paragraph.content
+                  when "heading_3"
+                    h3= paragraph.content
                   when "image"
                     p 
                       img(src=paragraph.url)
