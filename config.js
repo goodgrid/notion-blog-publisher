@@ -1,4 +1,4 @@
-import Secrets from "./secrets.js";
+
 
 const Config = {
     serverPort: 8080,
