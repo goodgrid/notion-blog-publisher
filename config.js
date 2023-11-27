@@ -2,7 +2,7 @@ import Secrets from "./secrets.js";
 
 const Config = {
     serverPort: 8080,
-    notionToken: (process.env.NOTION_TOKEN)?process.env.NOTION_TOKEN:Secrets.notionToken,
+    notionToken: process.env.NOTION_TOKEN,
     notionApiVersion: '2022-06-28',
     cfStatsToken: (process.env.CF_STATS_TOKEN)?process.env.CF_STATS_TOKEN:"edd6074a153c435185bcb86830f28626",
     content: {
